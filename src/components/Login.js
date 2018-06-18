@@ -48,7 +48,6 @@ class Login extends Component {
                             name={"username"}
                             component={this.renderUsernameField}
                         />
-                        <br/>
                         <Field
                             label={'Password'}
                             name={"password"}

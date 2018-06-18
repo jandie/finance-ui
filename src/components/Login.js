@@ -15,7 +15,7 @@ class Login extends Component {
             <TextField
                 id="username"
                 label="Username"
-                margin="normal"
+                autoComplete="none"
                 className={'field'}
             />
         );
@@ -27,8 +27,7 @@ class Login extends Component {
                 id="password-input"
                 label="Password"
                 type="password"
-                autoComplete="current-password"
-                margin="normal"
+                autoComplete="none"
                 className={'field'}
             />
         );
@@ -43,7 +42,6 @@ class Login extends Component {
                     />
                     <form>
                         <Field
-                            className={'field'}
                             label={'Username'}
                             name={"username"}
                             component={this.renderUsernameField}
@@ -53,7 +51,10 @@ class Login extends Component {
                             name={"password"}
                             component={this.renderPasswordField}
                         />
-                        <Button variant="contained" color="primary" className={'field'}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={'field'}>
                             Login
                         </Button>
                     </form>

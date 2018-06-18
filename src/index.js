@@ -10,6 +10,7 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers'
 import AppBar from './components/AppBar';
+import Login from './components/Login';
 
 const store = createStore(
     reducers,
@@ -26,6 +27,7 @@ ReactDOM.render(
         <BrowserRouter>
             <App>
                 <Route path={"/"} component={AppBar} />
+                <Route path={"/login"} component={Login} />
             </App>
         </BrowserRouter>
     </Provider>

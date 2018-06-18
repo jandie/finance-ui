@@ -9,7 +9,6 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers'
-import AppBar from './components/AppBar';
 import Login from './components/Login';
 
 const store = createStore(
@@ -26,7 +25,6 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <App>
-                <Route path={"/"} component={AppBar} />
                 <Route path={"/login"} component={Login} />
             </App>
         </BrowserRouter>

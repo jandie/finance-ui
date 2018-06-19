@@ -1,5 +1,11 @@
 import axios from 'axios';
-import {AUTH_CHANGE, AUTH_ERROR, BALANCES_FETCHED} from "./types";
+import {
+    AUTH_CHANGE,
+    AUTH_ERROR,
+    BALANCES_FETCHED,
+    BALANCE_ADDED,
+    BALANCE_DELETED
+} from "./types";
 
 const API_URL = 'http://localhost:8000/';
 
@@ -33,6 +39,36 @@ export const fetchBalances = () => dispatch => {
         dispatch({
             type: BALANCES_FETCHED,
             payload: res.data
+        });
+    })
+};
+
+export const addBalance = balance => dispatch => {
+    const url = `${API_URL}balances/`;
+
+    return axios.post(url, balance, {
+        headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+    }).then(res => {
+        dispatch({
+            type: BALANCE_ADDED,
+            payload: res.data
+        });
+    })
+};
+
+export const deleteBalance = id => dispatch => {
+    const url = `${API_URL}balances/${id}/`;
+
+    return axios.delete(url, {
+        headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+    }).then(res => {
+        dispatch({
+            type: BALANCE_DELETED,
+            payload: id
         });
     })
 };

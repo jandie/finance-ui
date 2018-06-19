@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import './Login.css'
 import * as actions from '../../actions/index';
 
 class Login extends Component {

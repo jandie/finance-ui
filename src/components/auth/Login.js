@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import './Login.css'
-import * as actions from '../actions/index';
+import * as actions from '../../actions/index';
 
 class Login extends Component {
     renderUsernameField({input, label, meta: {touched, error}, ...custom}) {
@@ -41,7 +41,7 @@ class Login extends Component {
 
     onLogin = (credentials) => {
         this.props.login(credentials, () => {
-            console.log('Login successful!!!');
+            this.props.history.push('/dashboard/balances');
         })
     };
 

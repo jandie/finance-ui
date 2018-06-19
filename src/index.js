@@ -8,7 +8,8 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers'
-import Login from './components/Login';
+import Login from './components/auth/Login';
+import Balances from './components/balance/Balances';
 
 const store = createStore(
     reducers,
@@ -25,6 +26,7 @@ ReactDOM.render(
         <BrowserRouter>
             <App>
                 <Route path={"/login"} component={Login} />
+                <Route path={"/dashboard/balances"} component={Balances} />
             </App>
         </BrowserRouter>
     </Provider>

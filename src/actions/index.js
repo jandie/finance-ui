@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {AUTH_CHANGE, AUTH_ERROR} from "./types";
+import {AUTH_CHANGE, AUTH_ERROR, BALANCES_FETCHED} from "./types";
 
 const API_URL = 'http://localhost:8000/';
 
 export const login = (credentails, callback) => dispatch => {
     const url = `${API_URL}api-token-auth/`;
-    axios.post(url, credentails).then(response => {
+    return axios.post(url, credentails).then(response => {
         dispatch({
             type: AUTH_CHANGE,
             payload: response.data.token
@@ -19,4 +19,20 @@ export const login = (credentails, callback) => dispatch => {
             payload: 'Combination of username and password does not exist'
         });
     });
+};
+
+
+export const fetchBalances = () => dispatch => {
+    const url = `${API_URL}balances/`;
+
+    return axios.get(url, {
+        headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+    }).then(res => {
+        dispatch({
+            type: BALANCES_FETCHED,
+            payload: res.data
+        });
+    })
 };

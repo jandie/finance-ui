@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {compose} from 'redux';
 import {reduxForm, Field} from 'redux-form';
+import {connect} from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import TextField from '@material-ui/core/TextField';
@@ -8,39 +9,52 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import './Login.css'
+import * as actions from '../actions/index';
 
 class Login extends Component {
-    renderUsernameField() {
+    renderUsernameField({input, label, meta: {touched, error}, ...custom}) {
         return (
             <TextField
                 id="username"
-                label="Username"
+                label={label}
                 autoComplete="none"
                 className={'field'}
+                {...input}
+                {...custom}
             />
         );
     }
 
-    renderPasswordField() {
+    renderPasswordField({input, label, meta: {touched, error}, ...custom}) {
         return (
             <TextField
                 id="password-input"
-                label="Password"
+                label={label}
                 type="password"
                 autoComplete="none"
                 className={'field'}
+                {...input}
+                {...custom}
             />
         );
     }
 
+    onLogin = (credentials) => {
+        this.props.login(credentials, () => {
+            console.log('Login successful!!!');
+        })
+    };
+
     render() {
+        const {handleSubmit} = this.props;
+
         return (
             <Grid item xs={10} className={'login-card'}>
                 <Card>
                     <CardHeader
                         title={"Login"}
                     />
-                    <form>
+                    <form onSubmit={handleSubmit(this.onLogin)}>
                         <Field
                             label={'Username'}
                             name={"username"}
@@ -52,6 +66,7 @@ class Login extends Component {
                             component={this.renderPasswordField}
                         />
                         <Button
+                            type={'submit'}
                             variant="contained"
                             color="primary"
                             className={'field'}>
@@ -65,5 +80,6 @@ class Login extends Component {
 }
 
 export default compose(
+    connect(null, actions),
     reduxForm({form: 'login'})
 )(Login)

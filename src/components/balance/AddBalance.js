@@ -26,7 +26,7 @@ class AddBalance extends Component {
 
     onSubmit = (balance) => {
         this.props.addBalance(balance).then(() => {
-            this.props.history.push('/dashboard/balances')
+            this.props.closeNewBalance();
         })
     };
 
@@ -34,7 +34,7 @@ class AddBalance extends Component {
         const {handleSubmit} = this.props;
 
         return (
-            <Card className={'login-card'}>
+            <Card>
                 <CardHeader title={"New balance"} />
                 <CardContent>
                     <form onSubmit={handleSubmit(this.onSubmit)}>

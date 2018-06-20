@@ -9,7 +9,7 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers'
 import Login from './components/auth/Login';
-import Balances from './components/balance/Balances';
+import Balances from './components/balance/BalanceList';
 import AddBalance from './components/balance/AddBalance';
 
 const store = createStore(

@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import * as actions from '../../actions'
 import AddBalance from './AddBalance';
@@ -34,7 +35,16 @@ class BalanceList extends Component {
     };
 
     renderBalances = () => {
-        if (_.size(this.props.balances) === 0)
+        if (this.props.balances.loading)
+            return (
+                <Card>
+                    <CardContent>
+                        <LinearProgress />
+                    </CardContent>
+                </Card>
+            );
+
+        if (_.size(this.props.balances.balances) === 0)
             return (
                 <Card>
                     <CardContent>
@@ -43,7 +53,7 @@ class BalanceList extends Component {
                 </Card>
             );
 
-        return _.map(this.props.balances, balance => {
+        return _.map(this.props.balances.balances, balance => {
             return (
                 <BalanceItem
                     key={balance.id}

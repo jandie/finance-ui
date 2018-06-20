@@ -4,7 +4,7 @@ import {
     AUTH_ERROR,
     BALANCES_FETCHED,
     BALANCE_ADDED,
-    BALANCE_DELETED
+    BALANCE_DELETED, BALANCES_FETCHING
 } from "./types";
 
 const API_URL = 'http://localhost:8000/';
@@ -30,6 +30,11 @@ export const login = (credentails, callback) => dispatch => {
 
 export const fetchBalances = () => dispatch => {
     const url = `${API_URL}balances/`;
+
+    dispatch({
+        type: BALANCES_FETCHING,
+        payload: true
+    });
 
     return axios.get(url, {
         headers: {

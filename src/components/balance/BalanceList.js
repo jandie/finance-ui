@@ -45,6 +45,7 @@ class BalanceList extends Component {
         return _.map(this.props.balances, balance => {
             return (
                 <BalanceItem
+                    key={balance.id}
                     balance={balance}
                     deleteBalance={this.props.deleteBalance}
                 />

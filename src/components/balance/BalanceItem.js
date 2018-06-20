@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 
 export default function (props) {
     return(
-        <ExpansionPanel key={props.balance.id}>
+        <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                 <Typography className={'balance-name'}>{props.balance.name}</Typography>
                 <Typography>{props.balance.amount}</Typography>

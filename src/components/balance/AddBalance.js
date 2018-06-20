@@ -50,8 +50,13 @@ class AddBalance extends Component {
                             type={'number'}
                             component={this.renderField}
                         />
-                        <Button variant="contained" color="primary" className={'field'} type={'submit'}>
+                        <Button variant="contained" color="primary" type={'submit'}
+                                className={'add-object-button'}>
                             Add balance
+                        </Button>
+                        <Button variant="contained" className={'add-object-button'}
+                                onClick={this.props.closeNewBalance}>
+                            Cancel
                         </Button>
                     </form>
                 </CardContent>

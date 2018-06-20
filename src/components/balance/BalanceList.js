@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
 
 import * as actions from '../../actions'
 import AddBalance from './AddBalance';
@@ -71,11 +72,11 @@ class BalanceList extends Component {
                             </Button>
                         </CardActions>
                     </CardContent>
-
-                    {this.state.newBalanceOpen ? <AddBalance
-                            closeNewBalance={this.closeNewBalanceCallback}
-                        /> :
-                        <div/>}
+                    <Collapse in={this.state.newBalanceOpen}>
+                            <AddBalance
+                                closeNewBalance={this.closeNewBalanceCallback}
+                            />
+                    </Collapse>
 
                     {this.renderBalances()}
                 </Card>

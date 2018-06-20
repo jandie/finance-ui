@@ -41,7 +41,8 @@ class EditBalance extends Component {
             amount: this.state.amount
         };
 
-        this.props.editBalance(this.props.balance.id, balance);
+        this.props.editBalance(this.props.balance.id, balance)
+            .then(() => this.props.changeExpansion(null, false));
     };
 
     render() {

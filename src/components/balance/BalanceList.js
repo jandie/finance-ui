@@ -35,7 +35,8 @@ class BalanceList extends Component {
     };
 
     renderBalances = () => {
-        if (this.props.balances.loading)
+        if (_.size(this.props.balances.balances) === 0 &&
+            this.props.balances.loading)
             return (
                 <Card>
                     <CardContent>
@@ -75,7 +76,7 @@ class BalanceList extends Component {
                                 size="small"
                                 onClick={() => {
                                     this.setState({
-                                        newBalanceOpen: true
+                                        newBalanceOpen: !this.state.newBalanceOpen
                                     })
                                 }}>
                                 Add

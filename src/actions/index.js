@@ -58,6 +58,21 @@ export const addBalance = balance => dispatch => {
     })
 };
 
+export const editBalance = (id, balance) => dispatch => {
+    const url = `${API_URL}balances/${id}/`;
+
+    return axios.put(url, balance, {
+        headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+    }).then(res => {
+        dispatch({
+            type: BALANCE_ADDED,
+            payload: res.data
+        });
+    })
+};
+
 export const deleteBalance = id => dispatch => {
     const url = `${API_URL}balances/${id}/`;
 

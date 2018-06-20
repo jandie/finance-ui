@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Button from '@material-ui/core/Button';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
+import EditBalance from './EditBalance';
 
 export default function (props) {
     return(
@@ -14,17 +17,12 @@ export default function (props) {
                 <Typography className={'balance-name'}>{props.balance.name}</Typography>
                 <Typography>{props.balance.amount}</Typography>
             </ExpansionPanelSummary>
-            <ExpansionPanelActions>
-                <Button
-                    size="small"
-                    color={"secondary"}
-                    onClick={() => {
-                        props.deleteBalance(props.balance.id);
-                    }}>
-                    Remove
-                </Button>
-                <Button size="small">Edit</Button>
-            </ExpansionPanelActions>
+            <ExpansionPanelDetails>
+                <EditBalance
+                    balance={props.balance}
+                    deleteBalance={props.deleteBalance}
+                />
+            </ExpansionPanelDetails>
         </ExpansionPanel>
     );
 }

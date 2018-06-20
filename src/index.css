@@ -16,6 +16,14 @@ body {
   width: 90%;
 }
 
+.edit-form {
+  width: 100%;
+}
+
+.edit-form-actions{
+  float: right;
+}
+
 .balance-name {
   flex: 1;
 }

@@ -22,18 +22,6 @@ class EditBalance extends Component {
         });
     }
 
-    renderField({input, label, meta: {touched, error}, ...custom}) {
-        return (
-            <TextField
-                label={label}
-                autoComplete="none"
-                className={'field'}
-                {...input}
-                {...custom}
-            />
-        );
-    }
-
     onSubmit = (event) => {
         event.preventDefault();
         const balance = {

@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-import * as actions from '../../actions'
+import * as balanceActions from '../../actions/balance';
 import AddBalance from './AddBalance';
 import BalanceItem from './BalanceItem';
 
@@ -102,4 +102,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, actions)(BalanceList)
+export default connect(mapStateToProps, balanceActions)(BalanceList)

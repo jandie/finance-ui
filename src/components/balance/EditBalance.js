@@ -3,7 +3,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import * as actions from '../../actions/index';
+import * as actions from '../../actions/balance';
 
 class EditBalance extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class EditBalance extends Component {
                     }}
                 />
                 <TextField
-                    label={'Name'}
+                    label={'Amount'}
                     autoComplete="none"
                     className={'field'}
                     value={this.state.amount}

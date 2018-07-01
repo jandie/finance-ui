@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import * as actions from '../../actions/index';
+import * as actions from '../../actions/auth';
 
 class Login extends Component {
     renderUsernameField({input, label, meta: {touched, error}, ...custom}) {

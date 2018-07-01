@@ -1,5 +1,10 @@
 import _ from 'lodash';
-import {TRANSACTION_DELETED, TRANSACTION_EDITED, TRANSACTIONS_FETCHED, TRANSACTIONS_FETCHING} from "../actions/types";
+import {
+    TRANSACTION_DELETED,
+    TRANSACTION_EDITED,
+    TRANSACTIONS_FETCHED,
+    TRANSACTIONS_FETCHING
+} from "../actions/transactions";
 
 export default (state = {}, action) => {
     switch (action.type) {

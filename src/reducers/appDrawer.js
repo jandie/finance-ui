@@ -1,4 +1,4 @@
-import {APP_BAR_CHANGE} from "../actions/types";
+import {APP_BAR_CHANGE} from "../actions/appDrawer";
 
 export default (state = {}, action) => {
     switch (action.type) {

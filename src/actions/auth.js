@@ -1,6 +1,8 @@
-import {AUTH_CHANGE, AUTH_ERROR} from "./types";
 import axios from "axios/index";
 import {API_URL} from "../config";
+
+export const AUTH_CHANGE = 'AUTH_CHANGE';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 export const login = (credentails, callback) => dispatch => {
     const url = `${API_URL}api-token-auth/`;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
-import {OVERVIEW_FETCHED, OVERVIEW_FETCHING} from "./types";
+export const OVERVIEW_FETCHING = 'OVERVIEW_FETCHING';
+export const OVERVIEW_FETCHED = 'OVERVIEW_FETCHED';
 
 export const fetchOverview = () => dispatch => {
     const url = `${API_URL}users/overview/`;

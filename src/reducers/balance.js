@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {BALANCE_ADDED, BALANCE_DELETED, BALANCES_FETCHED, BALANCES_FETCHING} from "../actions/types";
+import {BALANCE_ADDED, BALANCE_DELETED, BALANCES_FETCHED, BALANCES_FETCHING} from "../actions/balance";
 
 export default (state = {}, action) => {
     switch (action.type) {

@@ -1,6 +1,10 @@
-import {BALANCE_ADDED, BALANCE_DELETED, BALANCES_FETCHED, BALANCES_FETCHING} from "./types";
 import axios from "axios/index";
 import {API_URL} from "../config";
+
+export const BALANCES_FETCHED = 'BALANCES_FETCHED';
+export const BALANCE_ADDED = 'BALANCE_ADDED';
+export const BALANCE_DELETED = 'BALANCE_DELETED';
+export const BALANCES_FETCHING = 'BALANCES_FETCHING';
 
 export const fetchBalances = () => dispatch => {
     const url = `${API_URL}balances/`;

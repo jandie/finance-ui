@@ -1,4 +1,4 @@
-import {APP_BAR_CHANGE} from "./types";
+export const APP_BAR_CHANGE = 'app_bar_change';
 
 export const changeAppDrawer = open => dispatch => {
     dispatch({

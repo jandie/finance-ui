@@ -1,7 +1,10 @@
 import {API_URL} from "../config";
 import axios from "axios/index";
-import {TRANSACTION_DELETED, TRANSACTION_EDITED, TRANSACTIONS_FETCHED, TRANSACTIONS_FETCHING} from "./types";
-import {fetchOverview} from "./overview";
+
+export const TRANSACTIONS_FETCHING = 'TRANSACTIONS_FETCHING';
+export const TRANSACTIONS_FETCHED = 'TRANSACTIONS_FETCHED';
+export const TRANSACTION_EDITED = 'TRANSACTION_EDITED';
+export const TRANSACTION_DELETED = 'TRANSACTION_DELETED';
 
 export const fetchTransactions = () => dispatch => {
     const url = `${API_URL}transactions/`;
@@ -36,8 +39,6 @@ export const editTransaction = (transaction, callback) => dispatch => {
             payload: res.data
         });
 
-        fetchOverview();
-
         callback();
     })
 };
@@ -54,8 +55,6 @@ export const deleteTransaction = (id, callback) => dispatch => {
             type: TRANSACTION_DELETED,
             payload: id
         });
-
-        fetchOverview();
 
         callback();
     })

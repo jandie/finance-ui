@@ -1,4 +1,4 @@
-import {OVERVIEW_FETCHED, OVERVIEW_FETCHING} from "../actions/types";
+import {OVERVIEW_FETCHED, OVERVIEW_FETCHING} from "../actions/overview";
 
 export default (state = {}, action) => {
     switch (action.type) {

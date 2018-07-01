@@ -5,6 +5,7 @@ import BalanceReducer from './balance';
 import AppDrawerReducer from './appDrawer';
 import OverviewReducer from './overview';
 import TransactionsReducer from './transactions';
+import PaymentsReducer from './payments';
 
 export default combineReducers({
     transactions: TransactionsReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     appDrawer: AppDrawerReducer,
     balances: BalanceReducer,
     auth: AuthenticationReducer,
-    form: formReducer
+    form: formReducer,
+    payments: PaymentsReducer,
 });

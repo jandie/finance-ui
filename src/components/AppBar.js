@@ -63,7 +63,7 @@ ButtonAppBar.propTypes = {
 function mapStateToProps(state) {
     return {
         auth: state.auth,
-        open: state.appBar.open
+        open: state.appDrawer.open
     }
 }
 

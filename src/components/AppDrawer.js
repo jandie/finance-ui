@@ -50,7 +50,7 @@ class AppDrawer extends React.Component {
 
         const sideList = (
             <div className={classes.list}>
-                <Link to={'/dashboard/balances'} className={classes.link}>
+                <Link to={'/dashboard/overview'} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon>
                             <HomeIcon/>
@@ -110,7 +110,7 @@ AppDrawer.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        open: state.appBar.open
+        open: state.appDrawer.open
     }
 }
 

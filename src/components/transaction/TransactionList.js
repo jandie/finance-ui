@@ -14,7 +14,10 @@ import {withStyles} from '@material-ui/core/styles';
 import {
     fetchTransactions,
     editTransaction,
-    deleteTransaction} from "../../actions/transactions";
+    deleteTransaction,
+    addTransaction} from "../../actions/transactions";
+import {fetchBalances} from "../../actions/balance";
+import {fetchPayments} from "../../actions/payments";
 import {fetchOverview} from "../../actions/overview";
 import TransactionItem from './TransactionItem';
 import AddTransaction from './AddTransaction';
@@ -63,9 +66,15 @@ class TransactionList extends Component {
                     </Button>
                 </CardContent>
                 <Collapse in={this.state.addOpen}>
-                    <AddTransaction
+                    {this.state.addOpen ? <AddTransaction
                         onCancel={() => this.setState({addOpen: false})}
-                    />
+                        balances={this.props.balances}
+                        payments={this.props.payments}
+                        addTransaction={this.props.addTransaction}
+                        fetchBalances={this.props.fetchBalances}
+                        fetchPayments={this.props.fetchPayments}
+                    /> : <div/>}
+
                 </Collapse>
                 {this.drawTransactions()}
             </Card>
@@ -75,7 +84,9 @@ class TransactionList extends Component {
 
 function mapStateToProps(state) {
     return {
-        transactions: state.transactions
+        transactions: state.transactions,
+        balances: state.balances,
+        payments: state.payments,
     };
 }
 
@@ -84,7 +95,10 @@ export default compose(
         fetchTransactions,
         editTransaction,
         deleteTransaction,
-        fetchOverview
+        fetchOverview,
+        addTransaction,
+        fetchBalances,
+        fetchPayments
     }),
     withStyles(styles),
 )(TransactionList)

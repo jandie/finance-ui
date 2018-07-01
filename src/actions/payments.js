@@ -13,7 +13,9 @@ export const fetchPayments = () => dispatch => {
     });
 
     axios.get(url, {
-        Authentication: `JWT ${localStorage.getItem('token')}`
+        headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+        }
     }).then(res => {
         dispatch({
             type: PAYMENTS_FETCHED,

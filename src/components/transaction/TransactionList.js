@@ -9,7 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {withStyles} from '@material-ui/core/styles';
 
-import {fetchTransactions} from "../../actions/transactions";
+import {
+    fetchTransactions,
+    editTransaction,
+    deleteTransaction} from "../../actions/transactions";
+import {fetchOverview} from "../../actions/overview";
 import TransactionItem from './TransactionItem';
 
 const styles = {};
@@ -26,7 +30,13 @@ class TransactionList extends Component {
             return <LinearProgress/>;
 
         return _.map(transactions, transaction => {
-            return <TransactionItem key={transaction.id} transaction={transaction}/>;
+            return <TransactionItem
+                key={transaction.id}
+                transaction={transaction}
+                editTransaction={this.props.editTransaction}
+                deleteTransaction={this.props.deleteTransaction}
+                fetchOverview={this.props.fetchOverview}
+            />;
         })
     };
 
@@ -49,6 +59,11 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-    connect(mapStateToProps, {fetchTransactions}),
+    connect(mapStateToProps, {
+        fetchTransactions,
+        editTransaction,
+        deleteTransaction,
+        fetchOverview
+    }),
     withStyles(styles),
 )(TransactionList)

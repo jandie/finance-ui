@@ -12,6 +12,8 @@ import ArrowDownIcon from '@material-ui/icons/ArrowDownward';
 import Green from '@material-ui/core/colors/green';
 import Red from '@material-ui/core/colors/red';
 
+import EditTransaction from './EditTransaction';
+
 const styles = {
     name: {
         flex: 1,
@@ -46,27 +48,33 @@ class TransactionItem extends Component {
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, transaction} = this.props;
         return (<ExpansionPanel
             expanded={this.state.expanded}
             onChange={this.onChangeExpansion}
         >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                 <div className={classes.name}>
-                    {this.props.transaction.outgoing ?
+                    {transaction.outgoing ?
                         <ArrowUpIcon className={classes.upArrow}/> :
                         <ArrowDownIcon className={classes.downArrow}/>}
                     <Typography className={classes.text}>
-                        {this.props.transaction.description}
+                        {transaction.description}
                     </Typography>
                 </div>
 
                 <Typography className={classes.text}>
-                    {this.props.transaction.amount}
+                    {transaction.amount}
                 </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-
+                <EditTransaction
+                    transaction={transaction}
+                    editTransaction={this.props.editTransaction}
+                    deleteTransaction={this.props.deleteTransaction}
+                    changeExpansion={this.onChangeExpansion}
+                    fetchOverview={this.props.fetchOverview}
+                />
             </ExpansionPanelDetails>
         </ExpansionPanel>);
     }

@@ -13,6 +13,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 import {fetchOverview} from "../../actions/overview";
+import TransactionList from '../transaction/TransactionList';
 
 const styles = theme => ({
     root: {
@@ -29,7 +30,7 @@ class Overview extends Component {
         this.props.fetchOverview();
     }
 
-    render() {
+    drawOverview = () => {
         const {classes} = this.props;
         const {overview} = this.props.overview;
 
@@ -69,6 +70,15 @@ class Overview extends Component {
                     </Table>
                 </CardContent>
             </Card>
+        );
+    };
+
+    render() {
+        return(
+            <div>
+                {this.drawOverview()}
+                <TransactionList/>
+            </div>
         );
     }
 }

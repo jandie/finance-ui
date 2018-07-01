@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+import {changeAppDrawer} from "../actions/appDrawer";
 
 const styles = {
     root: {
@@ -19,24 +26,48 @@ const styles = {
     },
 };
 
-function ButtonAppBar(props) {
-    const { classes } = props;
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="title" color="inherit" className={classes.flex}>
-                        WhatPays
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+class ButtonAppBar extends Component {
+
+    toggleAppBar = () => {
+        this.props.changeAppBar(!this.props.open);
+    };
+
+    render() {
+        const {classes} = this.props;
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="Menu"
+                            onClick={this.toggleAppBar}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" className={classes.flex}>
+                            WhatPays.Me
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
 ButtonAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+function mapStateToProps(state) {
+    return {
+        auth: state.auth,
+        open: state.appBar.open
+    }
+}
+
+export default compose(
+    connect(mapStateToProps, {changeAppBar: changeAppDrawer}),
+    withStyles(styles)
+)(ButtonAppBar);

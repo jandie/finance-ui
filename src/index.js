@@ -14,7 +14,9 @@ import Balances from './components/balance/BalanceList';
 const store = createStore(
     reducers,
     {
-
+        appBar: {
+            open: false
+        }
     },
     applyMiddleware(
         reduxThunk

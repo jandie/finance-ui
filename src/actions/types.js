@@ -1,3 +1,5 @@
+export const APP_BAR_CHANGE = 'app_bar_change';
+
 export const AUTH_CHANGE = 'AUTH_CHANGE';
 export const AUTH_ERROR = 'AUTH_ERROR';
 

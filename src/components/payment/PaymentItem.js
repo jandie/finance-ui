@@ -16,6 +16,12 @@ const styles = {
     },
     text: {
         marginTop: '3px',
+        marginRight: '10px'
+    },
+    textDescription: {
+        color: '#aeb0b2',
+        marginTop: '3px',
+        marginRight: '5px'
     },
     form: {
         width: '100%',
@@ -48,7 +54,8 @@ class PaymentItem extends Component {
             id: this.props.payment.id,
             name: this.state.name,
             amount: this.state.amount,
-            outgoing: this.props.payment.outgoing
+            outgoing: this.props.payment.outgoing,
+            paid: this.props.payment.paid
         };
 
         this.props.editPayment(payment, this.props.token, () => {
@@ -74,9 +81,17 @@ class PaymentItem extends Component {
                             {payment.name}
                         </Typography>
                     </div>
-
+                    <Typography className={classes.textDescription}>
+                        amount:
+                    </Typography>
                     <Typography className={classes.text}>
                         {payment.amount}
+                    </Typography>
+                    <Typography className={classes.textDescription}>
+                        paid:
+                    </Typography>
+                    <Typography className={classes.text}>
+                        {payment.paid}
                     </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>

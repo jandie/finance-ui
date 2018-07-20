@@ -56,6 +56,7 @@ class AddTransaction extends Component {
                     balance.amount = payment.outgoing ?
                         balance.amount - transaction.amount :
                         balance.amount + transaction.amount;
+                    balance.amount.toFixed(2);
                     this.props.editBalance(balance.id, balance, this.props.token, () => {
                         this.props.fetchOverview(this.props.token);
                     })

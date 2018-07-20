@@ -15,6 +15,7 @@ import {withStyles} from '@material-ui/core/styles';
 import requireAuth from "../auth/requireAuth";
 import {fetchPayments, editPayment, deletePayment} from "../../actions/payments";
 import PaymentItem from "./PaymentItem";
+import AddPayment from "./AddPayment";
 
 const styles = {};
 
@@ -27,6 +28,12 @@ class PaymentList extends Component {
             newPaymentOpen: false
         };
     }
+
+    toggleNewPayment = () => {
+        this.setState({
+            newPaymentOpen: !this.state.newPaymentOpen
+        })
+    };
 
     componentDidMount() {
         this.props.fetchPayments(this.props.token);
@@ -76,23 +83,19 @@ class PaymentList extends Component {
                     <CardActions>
                         <Button
                             size="small"
-                            onClick={() => {
-                                this.setState({
-                                    newBalanceOpen: !this.state.newBalanceOpen
-                                })
-                            }}>
+                            onClick={this.toggleNewPayment}>
                             Add
                         </Button>
                     </CardActions>
                 </CardContent>
                 <Collapse in={this.state.newPaymentOpen}>
-                    {/*<AddBalance*/}
-                    {/*closeNewBalance={this.closeNewBalanceCallback}*/}
-                    {/*token={this.props.token}*/}
-                    {/*/>*/}
+                    <AddPayment
+                        toggleNewPayment={this.toggleNewPayment}
+                        outgoing={this.state.outgoing}
+                    />
                 </Collapse>
-                {this.renderPayments()}
                 {this.renderPaymentsLoading()}
+                {this.renderPayments()}
             </Card>
         );
     }

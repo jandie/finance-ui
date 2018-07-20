@@ -12,8 +12,8 @@ export const fetchPayments = (token) => dispatch => {
     const url = `${API_URL}payments/`;
 
     dispatch({
-        type:PAYMENTS_FETCHING,
-        payload:true
+        type: PAYMENTS_FETCHING,
+        payload: true
     });
 
     axios.get(url, createAuth(token)).then(res => {
@@ -26,7 +26,24 @@ export const fetchPayments = (token) => dispatch => {
     })
 };
 
-export const editPayment = (payment, token, callback = () => {}) => dispatch => {
+export const addPayment = (payment, token, callback = () => {
+}) => dispatch => {
+    const url = `${API_URL}payments/`;
+
+    axios.post(url, payment, createAuth(token)).then(res => {
+        dispatch({
+            type: PAYMENT_FETCHED,
+            payload: res.data
+        });
+
+        callback();
+    }).catch( error => {
+        handleResponseError(dispatch, error.response.status);
+    })
+};
+
+export const editPayment = (payment, token, callback = () => {
+}) => dispatch => {
     const url = `${API_URL}payments/${payment.id}/`;
 
     axios.put(url, payment, createAuth(token)).then(res => {
@@ -41,7 +58,8 @@ export const editPayment = (payment, token, callback = () => {}) => dispatch => 
     })
 };
 
-export const deletePayment = (id, token, callback = () => {}) => dispatch => {
+export const deletePayment = (id, token, callback = () => {
+}) => dispatch => {
     const url = `${API_URL}payments/${id}/`;
 
     axios.delete(url, createAuth(token)).then(res => {

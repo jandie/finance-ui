@@ -1,5 +1,6 @@
 import axios from "axios/index";
 import {API_URL} from "../config";
+import {handleResponseError} from "./util";
 
 export const BALANCES_FETCHED = 'BALANCES_FETCHED';
 export const BALANCE_ADDED = 'BALANCE_ADDED';
@@ -14,7 +15,7 @@ export const fetchBalances = () => dispatch => {
         payload: true
     });
 
-    return axios.get(url, {
+    axios.get(url, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -23,13 +24,15 @@ export const fetchBalances = () => dispatch => {
             type: BALANCES_FETCHED,
             payload: res.data
         });
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };
 
 export const addBalance = balance => dispatch => {
     const url = `${API_URL}balances/`;
 
-    return axios.post(url, balance, {
+    axios.post(url, balance, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -38,13 +41,15 @@ export const addBalance = balance => dispatch => {
             type: BALANCE_ADDED,
             payload: res.data
         });
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };
 
 export const editBalance = (id, balance) => dispatch => {
     const url = `${API_URL}balances/${id}/`;
 
-    return axios.put(url, balance, {
+    axios.put(url, balance, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -53,6 +58,8 @@ export const editBalance = (id, balance) => dispatch => {
             type: BALANCE_ADDED,
             payload: res.data
         });
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };
 

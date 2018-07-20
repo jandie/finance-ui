@@ -13,6 +13,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import * as balanceActions from '../../actions/balance';
 import AddBalance from './AddBalance';
 import BalanceItem from './BalanceItem';
+import requireAuth from "../auth/requireAuth";
 
 
 class BalanceList extends Component {
@@ -102,4 +103,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, balanceActions)(BalanceList)
+export default connect(mapStateToProps, balanceActions)(requireAuth(BalanceList))

@@ -1,5 +1,6 @@
 import {API_URL} from "../config";
 import axios from "axios/index";
+import {handleResponseError} from "./util";
 
 export const TRANSACTIONS_FETCHING = 'TRANSACTIONS_FETCHING';
 export const TRANSACTIONS_FETCHED = 'TRANSACTIONS_FETCHED';
@@ -21,6 +22,8 @@ export const addTransaction = (transaction, paymentId, callback) => dispatch => 
       });
 
       callback();
+  }).catch(error => {
+      handleResponseError(dispatch, error.response.status);
   })
 };
 
@@ -32,7 +35,7 @@ export const fetchTransactions = () => dispatch => {
         payload: true
     });
 
-    return axios.get(url, {
+    axios.get(url, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -41,13 +44,15 @@ export const fetchTransactions = () => dispatch => {
             type: TRANSACTIONS_FETCHED,
             payload: res.data
         })
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };
 
 export const editTransaction = (transaction, callback) => dispatch => {
     const url = `${API_URL}transactions/${transaction.id}/`;
 
-    return axios.put(url, transaction, {
+    axios.put(url, transaction, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -58,13 +63,15 @@ export const editTransaction = (transaction, callback) => dispatch => {
         });
 
         callback();
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };
 
 export const deleteTransaction = (id, callback) => dispatch => {
     const url = `${API_URL}transactions/${id}/`;
 
-    return axios.delete(url, {
+    axios.delete(url, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -75,5 +82,7 @@ export const deleteTransaction = (id, callback) => dispatch => {
         });
 
         callback();
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };

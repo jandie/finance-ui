@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {API_URL} from "../config";
+import {handleResponseError} from "./util";
 export const OVERVIEW_FETCHING = 'OVERVIEW_FETCHING';
 export const OVERVIEW_FETCHED = 'OVERVIEW_FETCHED';
 
@@ -11,7 +12,7 @@ export const fetchOverview = () => dispatch => {
         payload: true
     });
 
-    return axios.get(url, {
+    axios.get(url, {
         headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -20,5 +21,7 @@ export const fetchOverview = () => dispatch => {
             type: OVERVIEW_FETCHED,
             payload: res.data
         })
+    }).catch(error => {
+        handleResponseError(dispatch, error.response.status);
     })
 };

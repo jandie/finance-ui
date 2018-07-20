@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 
 import {fetchOverview} from "../../actions/overview";
 import TransactionList from '../transaction/TransactionList';
+import requireAuth from "../auth/requireAuth";
 
 const styles = theme => ({
     root: {
@@ -96,4 +97,4 @@ Overview.propTypes = {
 export default compose(
     connect(mapStateToProps, {fetchOverview}),
     withStyles(styles)
-)(Overview)
+)(requireAuth(Overview))

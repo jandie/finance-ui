@@ -40,7 +40,7 @@ class Login extends Component {
 
     onLogin = (credentials) => {
         this.props.login(credentials, () => {
-            this.props.history.push('/dashboard/balances');
+            this.props.history.push('/dashboard/overview');
         })
     };
 

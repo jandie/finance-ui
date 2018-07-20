@@ -11,6 +11,7 @@ import reducers from './reducers'
 import Login from './components/auth/Login';
 import Balances from './components/balance/BalanceList';
 import Overview from "./components/overview/Overview";
+import Payments from './components/payment/PaymentList';
 
 const store = createStore(
     reducers,
@@ -35,6 +36,7 @@ ReactDOM.render(
                     <Route path={"/login"} component={Login} />
                     <Route path={"/dashboard/balances"} exact component={Balances} />
                     <Route path={"/dashboard/overview"} exact component={Overview} />
+                    <Route path={"/dashboard/payments/outgoing/:outgoing(true|false)"} exact component={Payments}/>
                 </Switch>
             </App>
         </BrowserRouter>

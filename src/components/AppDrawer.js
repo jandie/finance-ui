@@ -69,7 +69,7 @@ class AppDrawer extends React.Component {
                     </ListItem>
                 </Link>
 
-                <Link to={'/dashboard/balances'} className={classes.link}>
+                <Link to={'/dashboard/payments/outgoing/true'} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon>
                             <ArrowUpIcon className={classes.expenseIcon}/>
@@ -78,7 +78,7 @@ class AppDrawer extends React.Component {
                     </ListItem>
                 </Link>
 
-                <Link to={'/dashboard/balances'} className={classes.link}>
+                <Link to={'/dashboard/payments/outgoing/false'} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon>
                             <ArrowDownIcon className={classes.incomeIcon}/>

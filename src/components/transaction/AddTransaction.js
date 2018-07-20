@@ -1,14 +1,25 @@
 import React, {Component} from 'react';
 import {compose} from 'redux';
+import {connect} from 'react-redux';
 import {reduxForm, Field} from 'redux-form';
 import _ from 'lodash';
 
 import {withStyles} from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import {
+    Select,
+    TextField
+} from 'redux-form-material-ui';
+
+import {addTransaction} from "../../actions/transactions";
+import {fetchOverview} from "../../actions/overview";
+import {editBalance} from "../../actions/balance";
 
 const style = {
     field: {
@@ -29,25 +40,46 @@ class AddTransaction extends Component {
         this.props.fetchPayments(this.props.token);
     }
 
-    renderField = ({input, label, meta: {touched, error}, ...custom}, type) => {
-        const {classes} = this.props;
-        return (
-            <TextField
-                label={label}
-                autoComplete="none"
-                type={type}
-                className={classes.field}
-                {...input}
-                {...custom}
-            />
-        );
+    onSubmit = (transaction) => {
+        const newTransaction = {
+            description: transaction.description,
+            amount: transaction.amount
+        };
+        this.props.addTransaction(
+            newTransaction,
+            transaction.payment,
+            this.props.token,
+            () => {
+                if (transaction.balance) {
+                    const balance = this.props.balances.balances[transaction.balance];
+                    const payment = this.props.payments.payments[transaction.payment];
+                    balance.amount = payment.outgoing ?
+                        balance.amount - transaction.amount :
+                        balance.amount + transaction.amount;
+                    this.props.editBalance(balance.id, balance, this.props.token, () => {
+                        this.props.fetchOverview(this.props.token);
+                    })
+                } else {
+                    this.props.fetchOverview(this.props.token)
+                }
+            }
+        )
     };
 
-    onSubmit = (balance) => {
-        // this.props.addBalance(balance).then(() => {
-        //     this.props.closeNewBalance();
-        //     this.props.reset();
-        // });
+    renderBalanceOptions = () => {
+        return _.map(this.props.balances.balances, balance => {
+            return (
+                <MenuItem key={balance.id} value={balance.id}>{balance.name}</MenuItem>
+            );
+        })
+    };
+
+    renderPaymentOptions = () => {
+        return _.map(this.props.payments.payments, payment => {
+            return (
+                <MenuItem key={payment.id} value={payment.id}>{payment.name}</MenuItem>
+            );
+        });
     };
 
     render() {
@@ -69,24 +101,55 @@ class AddTransaction extends Component {
         return (
             <CardContent>
                 <form onSubmit={handleSubmit(this.onSubmit)}>
+                    <FormControl
+                        className={classes.field}>
+                        <InputLabel htmlFor="balance-simple">Balance</InputLabel>
+                        <Field
+                            label={'Balance'}
+                            name="balance"
+                            component={Select}
+                            placeholder="Balance"
+                            inputProps={{
+                                name: 'balance',
+                                id: 'balance-simple',
+                            }}
+                        >
+                            {this.renderBalanceOptions()}
+                        </Field>
+                    </FormControl>
+                    <FormControl
+                        className={classes.field}>
+                        <InputLabel htmlFor="payment-simple">Payment</InputLabel>
+                        <Field
+                            label={'Payment'}
+                            name="payment"
+                            component={Select}
+                            placeholder="Payment"
+                            inputProps={{
+                                name: 'payment',
+                                id: 'payment-simple',
+                            }}
+                        >
+                            {this.renderPaymentOptions()}
+                        </Field>
+                    </FormControl>
                     <Field
-                        name={"description"}
-                        label={"Description"}
-                        type={'normal'}
-                        component={this.renderField}
-                    />
-                    <Field
-                        name={"amount"}
-                        label={"Amount"}
+                        label={'Amount'}
+                        name="amount"
                         type={'number'}
-                        component={this.renderField}
-                    />
+                        component={TextField}
+                        className={classes.field}/>
+                    <Field
+                        label={'Description'}
+                        name="description"
+                        component={TextField}
+                        className={classes.field}/>
                     <Button
                         variant="contained"
                         color="primary"
                         type={'submit'}
                         className={classes.button}>
-                        Add balance
+                        Add transaction
                     </Button>
                     <Button variant="contained"
                             onClick={this.props.onCancel}
@@ -99,7 +162,19 @@ class AddTransaction extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        balances: state.balances,
+        payments: state.payments
+    }
+}
+
 export default compose(
+    connect(mapStateToProps, {
+        addTransaction,
+        fetchOverview,
+        editBalance
+    }),
     withStyles(style),
     reduxForm({
         form: 'addTransaction'

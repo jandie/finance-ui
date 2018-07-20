@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {
+    TRANSACTION_ADDED,
     TRANSACTION_DELETED,
     TRANSACTION_EDITED,
     TRANSACTIONS_FETCHED,
@@ -17,6 +18,11 @@ export default (state = {}, action) => {
             return{
                 transactions: _.mapKeys(action.payload, 'id'),
                 fetching: false
+            };
+        case TRANSACTION_ADDED:
+            return {
+                transactions: { ...state.transactions, [action.payload.id]:action.payload},
+                fetching: state.fetching
             };
         case TRANSACTION_EDITED:
             return {

@@ -17,6 +17,9 @@ const store = createStore(
     {
         appDrawer: {
             open: false
+        },
+        auth: {
+            token: localStorage.getItem('token')
         }
     },
     applyMiddleware(

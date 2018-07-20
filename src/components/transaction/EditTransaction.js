@@ -47,7 +47,7 @@ class EditTransaction extends Component {
 
         this.props.editTransaction(transaction, this.props.token, () => {
             this.props.changeExpansion(null, false);
-            this.props.fetchOverview();
+            this.props.fetchOverview(this.props.token);
         });
     };
 
@@ -84,7 +84,7 @@ class EditTransaction extends Component {
                         onClick={() => {
                             this.props.deleteTransaction(transaction.id, this.props.token,
                                 () => {
-                                    this.props.fetchOverview();
+                                    this.props.fetchOverview(this.props.token);
                                 });
                         }}>
                         Remove

@@ -33,7 +33,7 @@ class PaymentList extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if (this.state.outgoing === nextProps.match.params.outgoing !== 'true') {
+        if (this.state.outgoing === (nextProps.match.params.outgoing !== 'true')) {
             this.setState({
                 outgoing: nextProps.match.params.outgoing === 'true'
             });

@@ -74,6 +74,7 @@ class TransactionItem extends Component {
                     deleteTransaction={this.props.deleteTransaction}
                     changeExpansion={this.onChangeExpansion}
                     fetchOverview={this.props.fetchOverview}
+                    token={this.props.token}
                 />
             </ExpansionPanelDetails>
         </ExpansionPanel>);

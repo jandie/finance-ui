@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {compose} from 'redux';
 import {reduxForm, Field} from 'redux-form';
-import {connect} from 'react-redux';
 import _ from 'lodash';
 
 import {withStyles} from '@material-ui/core/styles';
@@ -26,8 +25,8 @@ const style = {
 
 class AddTransaction extends Component {
     componentDidMount() {
-        this.props.fetchBalances();
-        this.props.fetchPayments();
+        this.props.fetchBalances(this.props.token);
+        this.props.fetchPayments(this.props.token);
     }
 
     renderField = ({input, label, meta: {touched, error}, ...custom}, type) => {

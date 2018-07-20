@@ -45,7 +45,7 @@ class EditTransaction extends Component {
             amount: this.state.amount
         };
 
-        this.props.editTransaction(transaction, () => {
+        this.props.editTransaction(transaction, this.props.token, () => {
             this.props.changeExpansion(null, false);
             this.props.fetchOverview();
         });
@@ -82,9 +82,10 @@ class EditTransaction extends Component {
                         size="small"
                         color={"secondary"}
                         onClick={() => {
-                            this.props.deleteTransaction(transaction.id, () => {
-                                this.props.fetchOverview();
-                            });
+                            this.props.deleteTransaction(transaction.id, this.props.token,
+                                () => {
+                                    this.props.fetchOverview();
+                                });
                         }}>
                         Remove
                     </Button>
@@ -97,4 +98,4 @@ class EditTransaction extends Component {
 
 export default compose(
     withStyles(style)
-) (EditTransaction)
+)(EditTransaction)

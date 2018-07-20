@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {API_URL} from "../config";
-import {handleResponseError} from "./util";
+import {createAuth, handleResponseError} from "./util";
 export const OVERVIEW_FETCHING = 'OVERVIEW_FETCHING';
 export const OVERVIEW_FETCHED = 'OVERVIEW_FETCHED';
 
-export const fetchOverview = () => dispatch => {
+export const fetchOverview = (token) => dispatch => {
     const url = `${API_URL}users/overview/`;
 
     dispatch({
@@ -12,11 +12,7 @@ export const fetchOverview = () => dispatch => {
         payload: true
     });
 
-    axios.get(url, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    axios.get(url, createAuth(token)).then(res => {
         dispatch({
             type: OVERVIEW_FETCHED,
             payload: res.data

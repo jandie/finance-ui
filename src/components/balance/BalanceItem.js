@@ -36,6 +36,7 @@ export default class BalanceItem extends Component {
                         balance={this.props.balance}
                         deleteBalance={this.props.deleteBalance}
                         changeExpansion={this.onChangeExpansion}
+                        token={this.props.token}
                     />
                 </ExpansionPanelDetails>
             </ExpansionPanel>

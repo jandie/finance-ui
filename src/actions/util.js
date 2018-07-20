@@ -3,7 +3,7 @@ import {AUTH_CHANGE} from "./auth";
 export const createAuth = (token) => {
     return {
         headers: {
-            Authorization: token
+            Authorization: `JWT ${token}`
         }
     }
 };
@@ -18,6 +18,8 @@ export const handleResponseError = (dispatch, status) => {
             });
             localStorage.setItem('token', null);
             break;
+        default:
+            return;
     }
 };
 

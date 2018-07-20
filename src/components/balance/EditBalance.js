@@ -29,8 +29,8 @@ class EditBalance extends Component {
             amount: this.state.amount
         };
 
-        this.props.editBalance(this.props.balance.id, balance)
-            .then(() => this.props.changeExpansion(null, false));
+        this.props.editBalance(this.props.balance.id, balance, this.props.token,
+            () => this.props.changeExpansion(null, false));
     };
 
     render() {
@@ -63,7 +63,7 @@ class EditBalance extends Component {
                         size="small"
                         color={"secondary"}
                         onClick={() => {
-                            this.props.deleteBalance(this.props.balance.id);
+                            this.props.deleteBalance(this.props.balance.id, this.props.token);
                         }}>
                         Remove
                     </Button>

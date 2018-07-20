@@ -26,7 +26,7 @@ class BalanceList extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchBalances();
+        this.props.fetchBalances(this.props.token);
     }
 
     closeNewBalanceCallback = () => {
@@ -61,6 +61,7 @@ class BalanceList extends Component {
                     key={balance.id}
                     balance={balance}
                     deleteBalance={this.props.deleteBalance}
+                    token={this.props.token}
                 />
             )
         });
@@ -87,6 +88,7 @@ class BalanceList extends Component {
                     <Collapse in={this.state.newBalanceOpen}>
                             <AddBalance
                                 closeNewBalance={this.closeNewBalanceCallback}
+                                token={this.props.token}
                             />
                     </Collapse>
 
@@ -99,7 +101,8 @@ class BalanceList extends Component {
 
 function mapStateToProps(state) {
     return {
-        balances: state.balances
+        balances: state.balances,
+        token: state.auth.token
     }
 }
 

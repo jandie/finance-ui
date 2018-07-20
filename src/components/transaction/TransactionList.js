@@ -30,7 +30,7 @@ class TransactionList extends Component {
     };
 
     componentDidMount() {
-        this.props.fetchTransactions();
+        this.props.fetchTransactions(this.props.token);
     }
 
     drawTransactions = () => {
@@ -46,6 +46,7 @@ class TransactionList extends Component {
                 editTransaction={this.props.editTransaction}
                 deleteTransaction={this.props.deleteTransaction}
                 fetchOverview={this.props.fetchOverview}
+                token={this.props.token}
             />;
         })
     };
@@ -73,6 +74,7 @@ class TransactionList extends Component {
                         addTransaction={this.props.addTransaction}
                         fetchBalances={this.props.fetchBalances}
                         fetchPayments={this.props.fetchPayments}
+                        token={this.props.token}
                     /> : <div/>}
 
                 </Collapse>
@@ -87,6 +89,7 @@ function mapStateToProps(state) {
         transactions: state.transactions,
         balances: state.balances,
         payments: state.payments,
+        token: state.auth.token,
     };
 }
 

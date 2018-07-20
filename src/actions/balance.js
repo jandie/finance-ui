@@ -1,13 +1,13 @@
 import axios from "axios/index";
 import {API_URL} from "../config";
-import {handleResponseError} from "./util";
+import {createAuth, handleResponseError} from "./util";
 
 export const BALANCES_FETCHED = 'BALANCES_FETCHED';
 export const BALANCE_ADDED = 'BALANCE_ADDED';
 export const BALANCE_DELETED = 'BALANCE_DELETED';
 export const BALANCES_FETCHING = 'BALANCES_FETCHING';
 
-export const fetchBalances = () => dispatch => {
+export const fetchBalances = (token) => dispatch => {
     const url = `${API_URL}balances/`;
 
     dispatch({
@@ -15,11 +15,7 @@ export const fetchBalances = () => dispatch => {
         payload: true
     });
 
-    axios.get(url, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    axios.get(url, createAuth(token)).then(res => {
         dispatch({
             type: BALANCES_FETCHED,
             payload: res.data
@@ -29,14 +25,10 @@ export const fetchBalances = () => dispatch => {
     })
 };
 
-export const addBalance = balance => dispatch => {
+export const addBalance = (balance, token) => dispatch => {
     const url = `${API_URL}balances/`;
 
-    axios.post(url, balance, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    axios.post(url, balance, createAuth(token)).then(res => {
         dispatch({
             type: BALANCE_ADDED,
             payload: res.data
@@ -46,31 +38,25 @@ export const addBalance = balance => dispatch => {
     })
 };
 
-export const editBalance = (id, balance) => dispatch => {
+export const editBalance = (id, balance, token, callback) => dispatch => {
     const url = `${API_URL}balances/${id}/`;
 
-    axios.put(url, balance, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    axios.put(url, balance, createAuth(token)).then(res => {
         dispatch({
             type: BALANCE_ADDED,
             payload: res.data
         });
+
+        callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status);
     })
 };
 
-export const deleteBalance = id => dispatch => {
+export const deleteBalance = (id, token) => dispatch => {
     const url = `${API_URL}balances/${id}/`;
 
-    return axios.delete(url, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    return axios.delete(url, createAuth(token)).then(res => {
         dispatch({
             type: BALANCE_DELETED,
             payload: id

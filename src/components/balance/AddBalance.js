@@ -23,7 +23,7 @@ class AddBalance extends Component {
     }
 
     onSubmit = (balance) => {
-        this.props.addBalance(balance).then(() => {
+        this.props.addBalance(balance, this.props.token, () => {
             this.props.closeNewBalance();
             this.props.reset();
         });

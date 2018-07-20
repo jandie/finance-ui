@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {API_URL} from "../config";
-import {handleResponseError} from "./util";
+import {createAuth, handleResponseError} from "./util";
 
 export const PAYMENTS_FETCHING = 'PAYMENTS_FETCHING';
 export const PAYMENTS_FETCHED = 'PAYMENTS_FETCHED';
 
-export const fetchPayments = () => dispatch => {
+export const fetchPayments = (token) => dispatch => {
     const url = `${API_URL}payments/`;
 
     dispatch({
@@ -13,11 +13,7 @@ export const fetchPayments = () => dispatch => {
         payload:true
     });
 
-    axios.get(url, {
-        headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-    }).then(res => {
+    axios.get(url, createAuth(token)).then(res => {
         dispatch({
             type: PAYMENTS_FETCHED,
             payload: res.data

@@ -28,7 +28,7 @@ const styles = theme => ({
 
 class Overview extends Component {
     componentDidMount() {
-        this.props.fetchOverview();
+        this.props.fetchOverview(this.props.token);
     }
 
     drawOverview = () => {
@@ -86,7 +86,8 @@ class Overview extends Component {
 
 function mapStateToProps(state) {
     return {
-        overview: state.overview
+        overview: state.overview,
+        token: state.auth.token
     }
 }
 

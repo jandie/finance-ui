@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {Link} from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import {changeAppDrawer} from "../actions/appDrawer";
+import {changeAuth} from "../actions/auth";
 
 const styles = {
     root: {
@@ -23,13 +24,32 @@ const styles = {
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
+        color: 'inherit',
+        textDecoration: 'none'
     },
 };
 
 class ButtonAppBar extends Component {
 
     toggleAppBar = () => {
-        this.props.changeAppBar(!this.props.open);
+        this.props.changeAppDrawer(!this.props.open);
+    };
+
+    renderLoginLogout = () => {
+        const {classes} = this.props;
+        return this.props.token === null ?
+            <Button className={classes.menuButton}
+                    onClick={() => {
+                        this.props.changeAuth(null);
+                        localStorage.setItem('token', null);
+                    }}>
+                Logout
+            </Button> :
+            <Link to={'/login'} className={classes.menuButton} >
+                <Button color={'inherit'}>
+                    Login
+                </Button>
+            </Link>
     };
 
     render() {
@@ -48,7 +68,8 @@ class ButtonAppBar extends Component {
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             WhatPays.Me
                         </Typography>
-                        <Button color="inherit">Login</Button>
+
+                        {this.renderLoginLogout()}
                     </Toolbar>
                 </AppBar>
             </div>
@@ -56,18 +77,17 @@ class ButtonAppBar extends Component {
     }
 }
 
-ButtonAppBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
 function mapStateToProps(state) {
     return {
-        auth: state.auth,
+        token: state.auth.token,
         open: state.appDrawer.open
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {changeAppBar: changeAppDrawer}),
+    connect(mapStateToProps, {
+        changeAppDrawer,
+        changeAuth
+    }),
     withStyles(styles)
 )(ButtonAppBar);

@@ -24,3 +24,10 @@ export const login = (credentails, callback) => dispatch => {
         dispatchSnack(dispatch, 'Wrong username or password');
     });
 };
+
+export const changeAuth = (token) => dispatch => {
+    dispatch({
+        type: AUTH_CHANGE,
+        payload: token
+    });
+};

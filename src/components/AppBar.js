@@ -16,7 +16,8 @@ import {changeAuth} from "../actions/auth";
 
 const styles = {
     root: {
-        flexGrow: 1,
+        width: '100%',
+        height: '60px'
     },
     flex: {
         flex: 1,
@@ -37,7 +38,7 @@ class ButtonAppBar extends Component {
 
     renderLoginLogout = () => {
         const {classes} = this.props;
-        return this.props.token === null ?
+        return this.props.token !== null ?
             <Button className={classes.menuButton}
                     onClick={() => {
                         this.props.changeAuth(null);

@@ -9,8 +9,9 @@ export const createAuth = (token) => {
     }
 };
 
-export const handleResponseError = (dispatch, status, defaultMessage = 'Something went wrong, please try again') => {
-    console.log(status);
+export const handleResponseError = (dispatch, response, defaultMessage = 'Something went wrong, please try again') => {
+    let status = response !== undefined ? response.status : -1;
+
     switch (status) {
         case 401:
             dispatch({

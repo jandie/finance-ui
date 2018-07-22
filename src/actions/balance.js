@@ -21,7 +21,7 @@ export const fetchBalances = (token) => dispatch => {
             payload: res.data
         });
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Fetching balances failed');
     })
 };
@@ -36,7 +36,7 @@ export const addBalance = (balance, token) => dispatch => {
         });
         dispatchSnack(dispatch, 'Balance added');
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Adding balance failed');
     })
 };
@@ -52,7 +52,7 @@ export const editBalance = (id, balance, token, callback) => dispatch => {
         dispatchSnack(dispatch, 'Balance edited');
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Editing balance failed');
     })
 };
@@ -67,7 +67,7 @@ export const deleteBalance = (id, token) => dispatch => {
         });
         dispatchSnack(dispatch, 'Balance deleted');
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Deleting balance failed');
     })
 };

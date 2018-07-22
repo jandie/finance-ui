@@ -18,7 +18,7 @@ export const fetchOverview = (token) => dispatch => {
             payload: res.data
         })
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Fetching overview failed');
     })
 };

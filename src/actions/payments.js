@@ -22,7 +22,7 @@ export const fetchPayments = (token) => dispatch => {
             payload: res.data
         })
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Fetching payments failed');
     })
 };
@@ -39,7 +39,7 @@ export const addPayment = (payment, token, callback = () => {
         dispatchSnack(dispatch, 'Payment added');
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Adding payment failed');
     })
 };
@@ -56,7 +56,7 @@ export const editPayment = (payment, token, callback = () => {
         dispatchSnack(dispatch, 'Payment edited');
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Editing payment failed');
     })
 };
@@ -73,7 +73,7 @@ export const deletePayment = (id, token, callback = () => {
         dispatchSnack(dispatch, 'Payment deleted');
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status,
+        handleResponseError(dispatch, error.response,
             'Error: Deleting payment failed');
     })
 };

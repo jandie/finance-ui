@@ -37,6 +37,10 @@ const styles = theme => ({
     },
     link: {
         textDecoration: 'none'
+    },
+    whiteSpace: {
+        width: '100%',
+        height: '60px'
     }
 });
 
@@ -50,6 +54,7 @@ class AppDrawer extends React.Component {
 
         const sideList = (
             <div className={classes.list}>
+                <div className={classes.whiteSpace}/>
                 <Link to={'/dashboard/overview'} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon>

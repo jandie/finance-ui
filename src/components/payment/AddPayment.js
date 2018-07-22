@@ -2,16 +2,10 @@ import React, {Component} from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {reduxForm, Field} from 'redux-form';
-import _ from 'lodash';
 
 import {withStyles} from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 import {
     TextField
 } from 'redux-form-material-ui';

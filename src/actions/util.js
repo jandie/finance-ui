@@ -1,4 +1,5 @@
 import {AUTH_CHANGE} from "./auth";
+import {SNACKBAR_UPDATE} from "./snackbar";
 
 export const createAuth = (token) => {
     return {
@@ -23,9 +24,9 @@ export const handleResponseError = (dispatch, status) => {
     }
 };
 
-// export const dispatchSnack = (dispatch, info) => {
-//     dispatch({
-//         type: SNACKBAR_UPDATE,
-//         payload: {open: true, text: info}
-//     })
-// };
+export const dispatchSnack = (dispatch, info) => {
+    dispatch({
+        type: SNACKBAR_UPDATE,
+        payload: {open: true, text: info}
+    })
+};

@@ -9,7 +9,7 @@ export const createAuth = (token) => {
     }
 };
 
-export const handleResponseError = (dispatch, status) => {
+export const handleResponseError = (dispatch, status, defaultMessage = 'Something went wrong, please try again') => {
     console.log(status);
     switch (status) {
         case 401:
@@ -18,8 +18,10 @@ export const handleResponseError = (dispatch, status) => {
                 payload: null
             });
             localStorage.setItem('token', null);
+            dispatchSnack(dispatch, 'Session expired, please login again');
             break;
         default:
+            dispatchSnack(dispatch, defaultMessage);
             return;
     }
 };

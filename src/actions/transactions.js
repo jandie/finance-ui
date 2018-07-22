@@ -19,7 +19,8 @@ export const addTransaction = (transaction, paymentId, token, callback) => dispa
 
       callback();
   }).catch(error => {
-      handleResponseError(dispatch, error.response.status);
+      handleResponseError(dispatch, error.response.status,
+          'Error: Adding transaction failed');
   })
 };
 
@@ -37,7 +38,8 @@ export const fetchTransactions = (token) => dispatch => {
             payload: res.data
         })
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status);
+        handleResponseError(dispatch, error.response.status,
+            'Error: Fetching transactions failed');
     })
 };
 
@@ -52,7 +54,8 @@ export const editTransaction = (transaction, token, callback) => dispatch => {
 
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status);
+        handleResponseError(dispatch, error.response.status,
+            'Error: Editing transaction failed');
     })
 };
 
@@ -67,6 +70,7 @@ export const deleteTransaction = (id, token, callback) => dispatch => {
 
         callback();
     }).catch(error => {
-        handleResponseError(dispatch, error.response.status);
+        handleResponseError(dispatch, error.response.status,
+            'Error: Deleting transaction failed');
     })
 };

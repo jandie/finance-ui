@@ -53,12 +53,9 @@ class AddTransaction extends Component {
                 if (transaction.balance) {
                     const balance = this.props.balances.balances[transaction.balance];
                     const payment = this.props.payments.payments[transaction.payment];
-                    console.log(balance.amount);
-                    console.log(transaction.amount);
                     balance.amount = payment.outgoing ?
                         parseFloat(balance.amount) - parseFloat(transaction.amount) :
                         parseFloat(balance.amount) + parseFloat(transaction.amount);
-                    console.log(balance.amount);
                     balance.amount.toFixed(2);
                     this.props.editBalance(balance.id, balance, this.props.token, () => {
                         this.props.fetchOverview(this.props.token);

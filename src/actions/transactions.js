@@ -19,7 +19,6 @@ export const addTransaction = (transaction, paymentId, token, callback) => dispa
       dispatchSnack(dispatch, 'Transaction added');
       callback();
   }).catch(error => {
-      console.log(error);
       handleResponseError(dispatch, error.response,
           'Error: Adding transaction failed');
   })

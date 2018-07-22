@@ -1,6 +1,6 @@
 import axios from "axios/index";
 import {API_URL} from "../config";
-import {createAuth, handleResponseError} from "./util";
+import {createAuth, dispatchSnack, handleResponseError} from "./util";
 
 export const BALANCES_FETCHED = 'BALANCES_FETCHED';
 export const BALANCE_ADDED = 'BALANCE_ADDED';
@@ -34,6 +34,7 @@ export const addBalance = (balance, token) => dispatch => {
             type: BALANCE_ADDED,
             payload: res.data
         });
+        dispatchSnack(dispatch, 'Balance added');
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
             'Error: Adding balance failed');
@@ -48,7 +49,7 @@ export const editBalance = (id, balance, token, callback) => dispatch => {
             type: BALANCE_ADDED,
             payload: res.data
         });
-
+        dispatchSnack(dispatch, 'Balance edited');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
@@ -64,6 +65,7 @@ export const deleteBalance = (id, token) => dispatch => {
             type: BALANCE_DELETED,
             payload: id
         });
+        dispatchSnack(dispatch, 'Balance deleted');
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
             'Error: Deleting balance failed');

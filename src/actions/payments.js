@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {API_URL} from "../config";
-import {createAuth, handleResponseError} from "./util";
+import {createAuth, dispatchSnack, handleResponseError} from "./util";
 
 export const PAYMENTS_FETCHING = 'PAYMENTS_FETCHING';
 export const PAYMENTS_FETCHED = 'PAYMENTS_FETCHED';
@@ -36,7 +36,7 @@ export const addPayment = (payment, token, callback = () => {
             type: PAYMENT_FETCHED,
             payload: res.data
         });
-
+        dispatchSnack(dispatch, 'Payment added');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
@@ -53,7 +53,7 @@ export const editPayment = (payment, token, callback = () => {
             type: PAYMENT_FETCHED,
             payload: payment
         });
-
+        dispatchSnack(dispatch, 'Payment edited');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
@@ -70,7 +70,7 @@ export const deletePayment = (id, token, callback = () => {
             type: PAYMENT_DELETED,
             payload: id
         });
-
+        dispatchSnack(dispatch, 'Payment deleted');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,

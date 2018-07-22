@@ -1,6 +1,6 @@
 import {API_URL} from "../config";
 import axios from "axios/index";
-import {createAuth, handleResponseError} from "./util";
+import {createAuth, dispatchSnack, handleResponseError} from "./util";
 
 export const TRANSACTIONS_FETCHING = 'TRANSACTIONS_FETCHING';
 export const TRANSACTIONS_FETCHED = 'TRANSACTIONS_FETCHED';
@@ -16,7 +16,7 @@ export const addTransaction = (transaction, paymentId, token, callback) => dispa
           type: TRANSACTION_ADDED,
           payload: res.data
       });
-
+      dispatchSnack(dispatch, 'Transaction added');
       callback();
   }).catch(error => {
       handleResponseError(dispatch, error.response.status,
@@ -51,7 +51,7 @@ export const editTransaction = (transaction, token, callback) => dispatch => {
             type: TRANSACTION_EDITED,
             payload: res.data
         });
-
+        dispatchSnack(dispatch, 'Transaction edited');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,
@@ -67,7 +67,7 @@ export const deleteTransaction = (id, token, callback) => dispatch => {
             type: TRANSACTION_DELETED,
             payload: id
         });
-
+        dispatchSnack(dispatch, 'Transaction deleted');
         callback();
     }).catch(error => {
         handleResponseError(dispatch, error.response.status,

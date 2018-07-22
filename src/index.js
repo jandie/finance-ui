@@ -37,6 +37,8 @@ ReactDOM.render(
                     <Route path={"/dashboard/balances"} exact component={Balances} />
                     <Route path={"/dashboard/overview"} exact component={Overview} />
                     <Route path={"/dashboard/payments/outgoing/:outgoing(true|false)"} exact component={Payments}/>
+
+                    <Route path={''} component={Overview}/>
                 </Switch>
             </App>
         </BrowserRouter>

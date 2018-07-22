@@ -39,7 +39,10 @@ class TransactionList extends Component {
         if (_.size(transactions) === 0 && fetching)
             return <LinearProgress/>;
 
-        return _.map(transactions, transaction => {
+        const transCol = _.map(transactions, transaction => transaction);
+        transCol.reverse();
+
+        return transCol.map(transaction => {
             return <TransactionItem
                 key={transaction.id}
                 transaction={transaction}

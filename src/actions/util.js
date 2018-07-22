@@ -18,7 +18,7 @@ export const handleResponseError = (dispatch, response, defaultMessage = 'Someth
                 type: AUTH_CHANGE,
                 payload: null
             });
-            localStorage.setItem('token', null);
+            localStorage.setItem('token', '');
             dispatchSnack(dispatch, 'Session expired, please login again');
             break;
         default:

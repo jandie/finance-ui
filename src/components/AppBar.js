@@ -38,11 +38,11 @@ class ButtonAppBar extends Component {
 
     renderLoginLogout = () => {
         const {classes} = this.props;
-        return this.props.token !== null ?
+        return this.props.token ?
             <Button className={classes.menuButton}
                     onClick={() => {
                         this.props.changeAuth(null);
-                        localStorage.setItem('token', null);
+                        localStorage.setItem('token', '');
                     }}>
                 Logout
             </Button> :

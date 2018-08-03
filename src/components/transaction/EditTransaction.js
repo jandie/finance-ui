@@ -69,6 +69,7 @@ class EditTransaction extends Component {
                 <TextField
                     label={'Amount'}
                     autoComplete="none"
+                    type={'number'}
                     className={classes.field}
                     value={this.state.amount}
                     onChange={(event) => {

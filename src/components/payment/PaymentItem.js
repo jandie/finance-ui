@@ -8,20 +8,24 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = {
     name: {
         flex: 1,
         width: '50%',
+
     },
     text: {
         marginTop: '3px',
-        marginRight: '10px'
+        marginRight: '10px',
+        display: 'inline-block'
     },
     textDescription: {
         color: '#aeb0b2',
         marginTop: '3px',
-        marginRight: '5px'
+        marginRight: '5px',
+        display: 'inline-block'
     },
     form: {
         width: '100%',
@@ -34,6 +38,15 @@ const styles = {
     },
     actions: {
         float: 'right',
+    },
+    fullWidth: {
+        width: '100%',
+        display: 'inline-block'
+    },
+    ul: {
+        width: '100%',
+        padding: '0',
+        listStyleType: 'none',
     },
 };
 
@@ -69,6 +82,14 @@ class PaymentItem extends Component {
         })
     };
 
+    percent = (amount, paid) => {
+        let per = paid / amount * 100;
+
+        if (per > 100) per = 100;
+
+        return per;
+    };
+
     render() {
         const {payment, classes} = this.props;
         return (
@@ -76,24 +97,35 @@ class PaymentItem extends Component {
                 onChange={this.toggleExpansion}
                 expanded={this.state.expanded}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                    <div className={classes.name}>
-                        <Typography className={classes.text}>
-                            {payment.name}
-                        </Typography>
-                    </div>
-                    <Typography className={classes.textDescription}>
-                        amount:
-                    </Typography>
-                    <Typography className={classes.text}>
-                        {payment.amount}
-                    </Typography>
-                    <Typography className={classes.textDescription}>
-                        paid:
-                    </Typography>
-                    <Typography className={classes.text}>
-                        {payment.paid}
-                    </Typography>
+                    <ul className={classes.ul}>
+                        <li className={classes.li}>
+                            <Typography className={classes.text}>
+                                <b>{payment.name}</b>
+                            </Typography>
+                            <Typography className={classes.textDescription}>
+                                amount:
+                            </Typography>
+                            <Typography className={classes.text}>
+                                {payment.amount}
+                            </Typography>
+                            <Typography className={classes.textDescription}>
+                                paid:
+                            </Typography>
+                            <Typography className={classes.text}>
+                                {payment.paid}
+                            </Typography>
+                        </li>
+                        <li className={classes.li}>
+                            <LinearProgress
+                                className={classes.fullWidth}
+                                variant={'determinate'}
+                                value={this.percent(payment.amount, payment.paid)}
+                            />
+                        </li>
+                    </ul>
+
                 </ExpansionPanelSummary>
+
                 <ExpansionPanelDetails>
                     <form className={classes.form} onSubmit={this.onSubmit}>
                         <TextField

@@ -51,6 +51,7 @@ class EditBalance extends Component {
                     label={'Amount'}
                     autoComplete="none"
                     className={'field'}
+                    type={'number'}
                     value={this.state.amount}
                     onChange={(event) => {
                         this.setState({
